@@ -1,0 +1,153 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #111;
+  color: #eee;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  background: url('/wedding-pic1.png') center/cover no-repeat;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+header .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+header .btn {
+  background-color: #d97706;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+header .btn:hover {
+  background-color: #f59e0b;
+}
+
+.content-block {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #fbbf24;
+}
+
+.section-title p {
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.passage-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: #222;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
+}
+
+.card h3 {
+  color: #f59e0b;
+  margin-bottom: 15px;
+}
+
+.card p {
+  color: #ccc;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 15px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+.wedding-section {
+  margin-top: 3rem;
+}
+
+.wedding-video video {
+  border-radius: 12px;
+}
+
+footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+footer a {
+  color: #fbbf24;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+}
