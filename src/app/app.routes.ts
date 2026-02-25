@@ -16,6 +16,8 @@ import { CinematicShooting } from './Website/services/cinematic-shooting/cinemat
 import { NewbornShoot } from './Website/services/newborn-shoot/newborn-shoot';
 import { KidBirthdayShoot } from './Website/services/kid-birthday-shoot/kid-birthday-shoot';
 import { KidOutdoorShoot } from './Website/services/kid-outdoor-shoot/kid-outdoor-shoot';
+import { ProductLaunchShoot } from './Website/services/product-launch-shoot/product-launch-shoot';
+import { BusinessMeetupShoot } from './Website/services/business-meetup-shoot/business-meetup-shoot';
 
 export const routes: Routes = [
   {
@@ -37,6 +39,8 @@ export const routes: Routes = [
       { path: 'newborn-shoot', component: NewbornShoot },
       { path: 'bithday-shoot', component: KidBirthdayShoot },
       { path: 'kid-outdoor-shoot', component: KidOutdoorShoot },
+      {path:"product-launch-shoot",component:ProductLaunchShoot},
+      {path:"business-meetup-shoot",component:BusinessMeetupShoot}
     ],
   },
 ];
