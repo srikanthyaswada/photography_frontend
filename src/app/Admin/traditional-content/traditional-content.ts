@@ -1,0 +1,155 @@
+import { Component, OnInit } from '@angular/core';
+import { ApiServices } from '../../services/api-services';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-traditional-content',
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './traditional-content.html',
+  styleUrls: ['./traditional-content.scss'],
+})
+export class TraditionalContent implements OnInit {
+  selectedTab = 'images';
+
+  images: string[] = [];
+  videos: any[] = [];
+  packages: any[] = [];
+  selectedIndex!: number;
+  selectedFile!: File;
+  newImages: File[] = [];
+  newVideos: File[] = [];
+  eventTypes: any[] = [];
+  eventType: string = '';
+  adminId: string = '';
+
+  constructor(private api: ApiServices) {}
+
+  ngOnInit(): void {
+    const storedUser = localStorage.getItem('admin');
+
+    if (storedUser) {
+      const admin = JSON.parse(storedUser);
+      this.adminId = admin._id;
+    }
+
+    this.loadData();
+    this.loadEventTypes();
+  }
+
+  selectTab(tab: string) {
+    this.selectedTab = tab;
+  }
+  loadEventTypes() {
+    this.api.getEventTypes().subscribe({
+      next: (res: any) => {
+        this.eventTypes = res?.data || [];
+      },
+      error: (err) => {
+        console.error('Error loading event types', err);
+      },
+    });
+  }
+  onFileSelected(event: any, type: string) {
+    const files: FileList = event.target.files;
+    if (type === 'image') {
+      this.newImages.push(...Array.from(files));
+    }
+    if (type === 'video') {
+      this.newVideos.push(...Array.from(files));
+    }
+  }
+  saveFiles() {
+    if (!this.eventType) {
+      alert('Please select Event Type');
+      return;
+    }
+
+    const admin = JSON.parse(localStorage.getItem('admin') || '{}');
+
+    const formData = new FormData();
+
+    formData.append('eventType_id', this.eventType);
+    formData.append('admin_id', admin._id);
+
+    this.newImages.forEach((file) => formData.append('images', file));
+    this.newVideos.forEach((file) => formData.append('videos', file));
+
+    this.api.uploadTraditional(formData).subscribe({
+      next: (res: any) => {
+        alert('Files uploaded successfully');
+        this.newImages = [];
+        this.newVideos = [];
+        this.eventType = '';
+        this.loadData();
+      },
+      error: (err: any) => {
+        console.error(err);
+        alert('Error uploading files');
+      },
+    });
+  }
+
+  loadData() {
+    this.api.getAllTraditional().subscribe({
+      next: (res: any) => {
+        const events = res?.data || [];
+
+        this.images = [];
+        this.videos = [];
+        this.packages = [];
+
+        events.forEach((event: any) => {
+          if (event.images?.length) {
+            this.images.push(
+              ...event.images.map(
+                (img: string) => `http://localhost:3007/${img.replace(/\\/g, '/')}`,
+              ),
+            );
+          }
+
+          if (event.videos?.length) {
+            this.videos.push(
+              ...event.videos.map(
+                (video: string) => `http://localhost:3007/${video.replace(/\\/g, '/')}`,
+              ),
+            );
+          }
+
+          if (event.packages?.length) {
+            this.packages.push(...event.packages);
+          }
+        });
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  edit(index: number, type: string) {
+    if (type === 'image') {
+      const image = this.images[index];
+      console.log('Edit image:', image);
+    }
+
+    if (type === 'video') {
+      const video = this.videos[index];
+      console.log('Edit video:', video);
+    }
+  }
+
+  deleteItem(index: number, type: string) {
+    const confirmDelete = confirm('Are you sure you want to delete this item?');
+
+    if (!confirmDelete) return;
+
+    if (type === 'image') {
+      this.images.splice(index, 1);
+    }
+
+    if (type === 'video') {
+      this.videos.splice(index, 1);
+    }
+  }
+}

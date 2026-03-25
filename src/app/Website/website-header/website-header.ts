@@ -10,4 +10,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class WebsiteHeader {
 
+  sidebarOpen = false;
+
+  toggleSidebar() {
+  this.sidebarOpen = !this.sidebarOpen;
+}
+toggleSubmenu(event: Event) {
+  event.preventDefault();
+  const target = (event.target as HTMLElement).nextElementSibling;
+  if (target) {
+    target.classList.toggle('active');
+  }
+}
 }

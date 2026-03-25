@@ -1,0 +1,89 @@
+.file-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+  padding: 20px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.event-type {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #fff;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      outline: none;
+    }
+  }
+}
+
+.file-inputs label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 220px;
+}
+
+.file-inputs input[type="file"] {
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #007bff;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+}
+
+.save-btn {
+  height: 42px;
+  padding: 0 25px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: end;
+  justify-content: end;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

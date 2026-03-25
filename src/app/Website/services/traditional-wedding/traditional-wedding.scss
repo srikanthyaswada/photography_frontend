@@ -260,3 +260,123 @@ footer a {
     align-items: center;
   }
 }
+
+@media (max-width: 992px) {
+  header {
+    height: 70vh;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header p {
+    font-size: 1.1rem;
+  }
+
+  .passage-cards {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+  }
+
+  .wedding-video video {
+    max-height: 400px;
+  }
+
+  .packages-container {
+    gap: 15px;
+  }
+
+  .package-card {
+    width: 280px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  header {
+    height: 60vh;
+    padding: 0 10px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+  }
+
+  .passage-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .wedding-video video {
+    width: 100%;
+    height: auto;
+  }
+
+  .packages-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .package-card {
+    width: 90%;
+    padding: 1.8rem 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+  }
+
+  .section-title p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-title p {
+    font-size: 0.9rem;
+  }
+
+  .package-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  .package-card ul li {
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 30px 10px;
+  }
+}

@@ -1,0 +1,224 @@
+.cinematic-container {
+  padding: 20px;
+
+  .heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+
+      &.active {
+        font-weight: bold;
+        border-bottom: 2px solid #007bff;
+      }
+    }
+  }
+
+  .tab-content {
+    height: 500px;
+    overflow-y: auto;
+
+    .images-tab {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .img-box {
+      position: relative;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .img-box img:hover {
+      transform: scale(1.05);
+    }
+
+    .img-actions {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .videos-tab {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .video-box {
+      position: relative;
+    }
+
+    .video-box video {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .video-actions {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+      border: none;
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .edit-btn {
+      background: #007bff;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+    }
+
+    .edit-btn:hover {
+      background: #0056b3;
+    }
+
+    .delete-btn:hover {
+      background: #b02a37;
+    }
+
+    .packages-tab {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .package-box {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #f9f9f9;
+
+      .pname {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .pprice {
+        color: green;
+        font-weight: 600;
+      }
+    }
+  }
+}
+.file-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+  padding: 20px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.event-type {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #fff;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      outline: none;
+    }
+  }
+}
+
+.file-inputs label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 220px;
+}
+
+.file-inputs input[type="file"] {
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #007bff;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+}
+
+.save-btn {
+  height: 42px;
+  padding: 0 25px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: end;
+  justify-content: end;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

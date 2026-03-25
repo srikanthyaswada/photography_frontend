@@ -1,0 +1,24 @@
+<div class="file-inputs">
+    <div class="event-type">
+      <label>Event Type*</label>
+
+      <select [(ngModel)]="eventType">
+        <option value="">Select Event Type</option>
+
+        <option *ngFor="let event of eventTypes" [value]="event._id">
+          {{ event.event_name }}
+        </option>
+      </select>
+    </div>
+    <label>
+      Upload Images*
+      <input type="file" (change)="onFileSelected($event, 'image')" multiple accept="image/*" />
+    </label>
+
+    <label>
+      Upload Videos*
+      <input type="file" (change)="onFileSelected($event, 'video')" multiple accept="video/*" />
+    </label>
+
+    <button class="save-btn" (click)="saveFiles()">Save</button>
+  </div>

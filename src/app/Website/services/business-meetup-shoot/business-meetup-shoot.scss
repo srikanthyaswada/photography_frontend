@@ -55,9 +55,11 @@
   background: #0056b3;
   transform: translateY(-3px);
 }
+
+
 .carousel {
-  width: auto;
-  height: 100%;
+  width: 100%;
+  max-height: 400px;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
@@ -94,31 +96,68 @@
 }
 
 @keyframes slide {
-  0% {
-    transform: translateX(0);
+  0% { transform: translateX(0); }
+  20% { transform: translateX(0); }
+  25% { transform: translateX(-100%); }
+  45% { transform: translateX(-100%); }
+  50% { transform: translateX(-200%); }
+  70% { transform: translateX(-200%); }
+  75% { transform: translateX(-300%); }
+  95% { transform: translateX(-300%); }
+  100% { transform: translateX(0); }
+}
+
+@media (max-width: 1024px) {
+  .business-meetup-shoot .section-title {
+    font-size: 28px;
   }
-  20% {
-    transform: translateX(0);
+  .business-meetup-shoot .section-description {
+    font-size: 16px;
   }
-  25% {
-    transform: translateX(-100%);
+  .carousel {
+    max-height: 300px;
   }
-  45% {
-    transform: translateX(-100%);
+  .slide .text {
+    font-size: 20px;
   }
-  50% {
-    transform: translateX(-200%);
+}
+
+@media (max-width: 768px) {
+  .business-meetup-shoot {
+    padding: 40px 15px;
   }
-  70% {
-    transform: translateX(-200%);
+  .carousel {
+    max-height: 250px;
   }
-  75% {
-    transform: translateX(-300%);
+  .slide .text {
+    font-size: 18px;
+    bottom: 15px;
+    left: 15px;
   }
-  95% {
-    transform: translateX(-300%);
+  .business-meetup-shoot .photo-gallery {
+    gap: 15px;
   }
-  100% {
-    transform: translateX(0);
+  .business-meetup-shoot .cta-button .btn-book {
+    padding: 10px 25px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .business-meetup-shoot .section-title {
+    font-size: 24px;
+  }
+  .business-meetup-shoot .section-description {
+    font-size: 14px;
+  }
+  .carousel {
+    max-height: 200px;
+  }
+  .slide .text {
+    font-size: 16px;
+  }
+  .business-meetup-shoot .cta-button .btn-book {
+    padding: 8px 20px;
+    font-size: 14px;
   }
 }
