@@ -1,19 +1,15 @@
 <div class="py-5 bg-light">
   <div class="container">
-
-    
-     <div class="carousel">
-    <div class="slides">
-      <div class="slide" *ngFor="let slide of slides">
-        <img [src]="slide.img" />
-        <div class="text">{{ slide.label }}</div>
+    <div class="carousel">
+      <div class="slides">
+        <div class="slide" *ngFor="let slide of slides">
+          <img [src]="slide.img" />
+          <div class="text">{{ slide.label }}</div>
+        </div>
       </div>
     </div>
-  </div>
 
     <div class="row g-4 mt-4">
-
-      
       <div class="col-md-6">
         <div class="card shadow-sm">
           <div class="card-body">
@@ -55,28 +51,24 @@
                 ></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary w-100">
-                Submit Enquiry
-              </button>
+              <button type="submit" class="btn btn-primary w-100">Submit Enquiry</button>
             </form>
           </div>
         </div>
       </div>
 
-     
       <div class="col-md-6">
         <div class="card h-100 border-0">
           <div class="card-body">
             <h3 class="fw-bold mb-3">RAFI PHOTOGRAPHY</h3>
 
             <p>
-              D – Block, Jain Carlton Creek, Beside Delhi Public School, Khajaguda,
-              Lanco Hills Road, Manikonda, Hyderabad, Telangana 500089
+              D – Block, Jain Carlton Creek, Beside Delhi Public School, Khajaguda, Lanco Hills
+              Road, Manikonda, Hyderabad, Telangana 500089
             </p>
             <p>Phone: +91 8688660606</p>
             <p>Email: rafiphotography@gmail.com</p>
 
-            
             <div class="circle-wrapper">
               <div class="big-circle">
                 <img [src]="contactImages.main" />
@@ -86,11 +78,9 @@
                 <img [src]="contactImages.small" />
               </div>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

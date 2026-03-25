@@ -1,6 +1,4 @@
 <div class="container">
-
-  
   <div class="carousel">
     <div class="slides">
       <div class="slide" *ngFor="let slide of slides">
@@ -10,7 +8,6 @@
     </div>
   </div>
 
-  
   <div class="row mt-4">
     <p class="passage">
       <strong>Professional Photographers Hyderabad</strong>, the phrase if it means something to
@@ -22,7 +19,6 @@
     </p>
   </div>
 
- 
   <div class="row align-items-center mb-5 team-row mt-2">
     <div class="col-md-4">
       <img [src]="team.founder.img" class="team-img" />
@@ -32,17 +28,21 @@
       <h5 class="fw-bold">{{ team.founder.role }}</h5>
       <p class="small">
         As the Owner & Founder, they lead the studio with a clear vision, creativity, and a
-        commitment to excellence.
+        commitment to excellence. With a passion for storytelling and visual artistry, they have
+        built the studio into a trusted name, delivering high-quality photography and cinematic
+        experiences.
       </p>
     </div>
   </div>
 
-  
   <div class="row align-items-center mb-5 team-row">
     <div class="col-md-6">
       <h5 class="fw-bold">{{ team.ceo.role }}</h5>
       <p class="small">
         Our Cinematographer brings stories to life through motion, emotion, and cinematic vision.
+        With extensive experience in lighting, camera movement, and visual storytelling, they craft
+        films that are immersive, elegant, and impactful—transforming moments into memorable
+        cinematic experiences.
       </p>
     </div>
 
@@ -59,38 +59,65 @@
     </div>
   </div>
 
-  
+  <h2 class="text-center fw-bold">Create Your Own Package</h2>
   <div class="container mt-4">
     <p class="text-center fs-4">Choose Your Celebration</p>
 
+    <!-- MAIN TYPES -->
     <div class="radio-group">
-      <label *ngFor="let type of mainTypes">
+      <label *ngFor="let type of mainTypes" class="radio-item main">
         <input type="radio" name="mainType" (change)="onMainTypeChange(type)" />
         {{ type }}
       </label>
     </div>
 
-    <div *ngIf="showSubOptions">
-      <label *ngFor="let sub of subTypes">
+    <!-- SUB TYPES -->
+    <div *ngIf="showSubOptions" class="radio-group mt-3">
+      <label *ngFor="let sub of subTypes" class="radio-item sub">
         <input type="radio" name="subType" (change)="onSubTypeChange(sub)" />
         {{ sub }}
       </label>
     </div>
 
-    <form [formGroup]="quoteForm" *ngIf="showForm">
-      <input type="text" formControlName="header" placeholder="Title" />
-      <input type="number" formControlName="price" placeholder="Price" />
+    <!-- FORM -->
+    <form [formGroup]="quoteForm" *ngIf="showForm" class="package-form mt-4">
+      <input type="text" formControlName="header" placeholder="Title" class="title-input" />
 
+      <input type="number" formControlName="price" placeholder="Price" class="price-input" />
+
+      <!-- FEATURES -->
       <div formArrayName="features">
-        <div *ngFor="let f of features.controls; let i = index">
+        <div *ngFor="let f of features.controls; let i = index" class="feature-item">
           <input [formControlName]="i" />
           <button type="button" (click)="removeFeature(i)">X</button>
         </div>
       </div>
 
-      <button type="button" (click)="addFeature()">+ Add</button>
-      <button type="button" (click)="submit()">Submit</button>
+      <!-- BUTTONS -->
+      <div class="button-group">
+        <button type="button" class="add-btn" (click)="addFeature()">+ Add</button>
+        <button type="button" class="quote-btn" (click)="submit()">Submit</button>
+      </div>
     </form>
   </div>
-
+  <div class="equipment-bg-section mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center text-dark">
+          <h4 class="fw-bold mb-3">Equipment & Celebrations</h4>
+          <p class="equipment-text">
+            We use high-end professional equipment to ensure exceptional image and film quality for
+            every project. From weddings and celebrations to corporate and personal events, our
+            advanced gear and skilled team help us capture every moment with clarity, creativity,
+            and cinematic excellence.
+          </p>
+          <p class="equipment-text">
+            Every celebration deserves to be captured beautifully. With state-of-the-art cameras,
+            lenses, lighting, and audio equipment, we ensure that no emotion, smile, or special
+            moment goes unnoticed—turning your celebrations into timeless memories.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
