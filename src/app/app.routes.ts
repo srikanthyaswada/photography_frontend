@@ -101,6 +101,8 @@ export const routes: Routes = [
       { path: 'kid-outdoor-shoot', component: KidOutdoorShoot },
       { path: 'product-launch-shoot', component: ProductLaunchShoot },
       { path: 'business-meetup-shoot', component: BusinessMeetupShoot },
+      {path:"product-launch-shoot",component:ProductLaunchShoot},
+      {path:"business-meetup-shoot",component:BusinessMeetupShoot}
     ],
   },
 
