@@ -1,0 +1,42 @@
+.table-responsive {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.quotation-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.quotation-table th, .quotation-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.quotation-table th {
+  background-color: #f5f5f5;
+}
+
+.quotation-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.actions button {
+  margin-right: 5px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  opacity: 0.8;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+}

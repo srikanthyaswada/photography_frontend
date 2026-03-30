@@ -187,3 +187,93 @@ footer {
     align-items: center;
   }
 }
+
+
+@media (max-width: 1200px) {
+  div {
+    padding: 60px 15px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header p {
+    font-size: 1.1rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .package-card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 992px) {
+  header {
+    height: 65vh;
+  }
+
+  .packages-container {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .packages-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .package-card {
+    width: 95%;
+    padding: 1.8rem 1.2rem;
+  }
+
+  .package-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .gallery img {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 0.85rem;
+  }
+
+  header .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  footer {
+    padding: 30px 15px;
+  }
+}

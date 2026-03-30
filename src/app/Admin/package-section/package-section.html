@@ -1,0 +1,41 @@
+<div class="package-wrapper">
+  <div class="package-form">
+    <!-- <h2>Add Event Package</h2> -->
+
+    <form [formGroup]="packageForm" (ngSubmit)="submitPackage()">
+      
+      <div class="event-type">
+        <label>Event Type*</label>
+        <select formControlName="eventType_id">
+          <option value="">Select Event Type</option>
+          <option *ngFor="let event of eventTypes" [value]="event._id">
+            {{ event.event_name }}
+          </option>
+        </select>
+      </div>
+
+      <label>Package Title</label>
+      <input formControlName="title" placeholder="Enter package name" />
+
+      <label>Price</label>
+      <input type="number" formControlName="price" placeholder="Enter price" />
+
+      <label>Features</label>
+
+      <div class="feature-list">
+        <div *ngFor="let feature of features.controls; let i = index" class="feature-item">
+          {{ feature.value }}
+          <button type="button" (click)="removeFeature(i)">×</button>
+        </div>
+      </div>
+
+      <div class="add-feature">
+        <input formControlName="newFeature" placeholder="Add new feature" />
+        <button type="button" (click)="addFeature()">+</button>
+      </div>
+
+      <button type="submit">Save Package</button>
+
+    </form>
+  </div>
+</div>

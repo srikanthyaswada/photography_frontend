@@ -201,3 +201,97 @@ footer {
   text-align: center;
   padding: 40px 20px;
 }
+
+
+@media (max-width: 992px) {
+  header {
+    height: 60vh;
+  }
+
+  header h1 {
+    font-size: 2.4rem;
+  }
+
+  header p {
+    font-size: 1.1rem;
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .packages-container {
+    gap: 15px;
+  }
+
+  .package-card {
+    width: 280px;
+    padding: 1.8rem 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  header .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .packages-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .package-card {
+    width: 95%;
+    padding: 1.5rem 1.2rem;
+  }
+
+  .package-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 0.85rem;
+  }
+
+  div {
+    padding: 50px 10px;
+  }
+
+  footer {
+    padding: 30px 10px;
+  }
+}

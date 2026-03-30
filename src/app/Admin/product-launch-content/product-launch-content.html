@@ -1,0 +1,148 @@
+ <div class="heading">Product Launch Event</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header fs-2" id="headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+      >
+        <strong>Upload Images / Videos</strong>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        <div class="row align-items-end g-3">
+           <form [formGroup]="uploadForm"  (ngSubmit)="saveFiles()">
+          <div class="file-inputs">
+            <div class="event-type">
+              <label>Event Type*</label>
+              <select formControlName="eventType_id">
+                <option value="">Select Event Type</option>
+                <option *ngFor="let event of eventTypes" [value]="event._id">
+                  {{ event.event_name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="file-box">
+              <label>Upload Images*</label>
+              <input
+                type="file"
+                (change)="onFileSelected($event, 'image')"
+                multiple
+                accept="image/*"
+              />
+            </div>
+
+            <div class="file-box">
+              <label>Upload Videos*</label>
+              <input
+                type="file"
+                (change)="onFileSelected($event, 'video')"
+                multiple
+                accept="video/*"
+              />
+            </div>
+
+            <button class="save-btn" >
+              <i class="bi bi-cloud-upload"></i> Save Files
+            </button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="product-container">
+ 
+
+  <div class="tabs-container">
+    <div class="tabs">
+      <div class="tab" [class.active]="selectedTab === 'images'" (click)="selectTab('images')">
+        Images
+      </div>
+
+      <div class="tab" [class.active]="selectedTab === 'videos'" (click)="selectTab('videos')">
+        Videos
+      </div>
+
+      <div class="tab" [class.active]="selectedTab === 'packages'" (click)="selectTab('packages')">
+        Packages
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="upload-btn" (click)="openUpload()"><i class="bi bi-upload"></i> Upload</button>
+
+      <button class="package-btn" (click)="addPackage()">
+        <i class="bi bi-plus-circle"></i> Add Package
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-content">
+   <div *ngIf="selectedTab === 'images'" class="images-tab">
+      <div class="img-box" *ngFor="let img of images">
+        <img [src]="img.url" />
+
+        <div class="img-actions">
+          <button (click)="edit(img, 'image')"><i class="bi bi-pencil"></i></button>
+
+          <button (click)="deleteItem(img, 'image')"><i class="bi bi-trash-fill"></i></button>
+        </div>
+      </div>
+    </div>
+
+   <div *ngIf="selectedTab === 'videos'" class="videos-tab">
+      <div class="video-box" *ngFor="let v of videos">
+        <video controls [src]="v.url"></video>
+
+        <div class="video-actions">
+          <button class="edit-btn" (click)="edit(v, 'video')">
+            <i class="bi bi-pencil"></i>
+          </button>
+
+          <button class="delete-btn" (click)="deleteItem(v, 'video')">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedTab === 'packages'" class="packages-tab">
+      <div class="package-card" *ngFor="let p of packages">
+        <h2 class="package-title">
+          {{ p.title || 'Package' }}
+        </h2>
+
+        <div class="package-price">₹{{ p.price }}</div>
+
+        <ul class="package-features">
+          <li *ngFor="let feature of p.features">
+            {{ feature }}
+          </li>
+
+          <li *ngIf="p.features.length === 0">No features available</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showPackageModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Add Package</h3>
+      <button class="close-btn" (click)="closeModal()">✖</button>
+    </div>
+
+    <div class="modal-body">
+      <app-package-section></app-package-section>
+    </div>
+  </div>
+</div>
