@@ -35,7 +35,6 @@
   opacity: 0.8;
 }
 
-/* Input Fields */
 .input-group {
   position: relative;
   margin-bottom: 22px;
@@ -63,7 +62,6 @@
   transition: 0.3s ease;
 }
 
-/* Floating Effect */
 .input-group input:focus + label,
 .input-group input:valid + label {
   top: -8px;
@@ -73,7 +71,6 @@
   color: #000;
 }
 
-/* Button */
 button {
   width: 100%;
   padding: 12px;
@@ -91,7 +88,6 @@ button:hover {
   background: #ffc107;
 }
 
-/* Register Text */
 .register-text {
   text-align: center;
   margin-top: 15px;
@@ -108,7 +104,6 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Mobile Responsive */
 @media (max-width: 480px) {
   .login-card {
     width: 90%;

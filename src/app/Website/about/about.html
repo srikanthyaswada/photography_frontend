@@ -60,46 +60,61 @@
   </div>
 
   <h2 class="text-center fw-bold">Create Your Own Package</h2>
-  <div class="container mt-4">
-    <p class="text-center fs-4">Choose Your Celebration</p>
+<div class="container mt-4">
+  <p class="text-center fs-4">Choose Your Celebration</p>
 
-    <!-- MAIN TYPES -->
-    <div class="radio-group">
-      <label *ngFor="let type of mainTypes" class="radio-item main">
-        <input type="radio" name="mainType" (change)="onMainTypeChange(type)" />
-        {{ type }}
-      </label>
-    </div>
-
-    <!-- SUB TYPES -->
-    <div *ngIf="showSubOptions" class="radio-group mt-3">
-      <label *ngFor="let sub of subTypes" class="radio-item sub">
-        <input type="radio" name="subType" (change)="onSubTypeChange(sub)" />
-        {{ sub }}
-      </label>
-    </div>
-
-    <!-- FORM -->
-    <form [formGroup]="quoteForm" *ngIf="showForm" class="package-form mt-4">
-      <input type="text" formControlName="header" placeholder="Title" class="title-input" />
-
-      <input type="number" formControlName="price" placeholder="Price" class="price-input" />
-
-      <!-- FEATURES -->
-      <div formArrayName="features">
-        <div *ngFor="let f of features.controls; let i = index" class="feature-item">
-          <input [formControlName]="i" />
-          <button type="button" (click)="removeFeature(i)">X</button>
-        </div>
-      </div>
-
-      <!-- BUTTONS -->
-      <div class="button-group">
-        <button type="button" class="add-btn" (click)="addFeature()">+ Add</button>
-        <button type="button" class="quote-btn" (click)="submit()">Submit</button>
-      </div>
-    </form>
+  <!-- MAIN TYPES -->
+  <div class="radio-group">
+    <label *ngFor="let type of mainTypes" class="radio-item main">
+      <input type="radio" name="mainType" (change)="onMainTypeChange(type)" />
+      {{ type }}
+    </label>
   </div>
+
+  <!-- SUB TYPES -->
+  <div *ngIf="showSubOptions" class="radio-group mt-3">
+    <label *ngFor="let sub of subTypes" class="radio-item sub">
+      <input type="radio" name="subType" (change)="onSubTypeChange(sub)" />
+      {{ sub }}
+    </label>
+  </div>
+
+  <!-- FORM -->
+ <form [formGroup]="quoteForm" *ngIf="showForm" class="package-form mt-4">
+
+  <!-- NAME -->
+  <input type="text" formControlName="name" placeholder="Your Name" class="form-input" />
+
+  <!-- MOBILE -->
+  <input type="tel" formControlName="mobile" placeholder="Mobile Number" class="form-input" />
+
+  <!-- EMAIL -->
+  <input type="email" formControlName="email" placeholder="Email Address" class="form-input" />
+
+  <!-- TITLE -->
+  <input type="text" formControlName="header" placeholder="Title" class="title-input" />
+
+  <!-- PRICE -->
+  <input type="number" formControlName="price" placeholder="Price" class="price-input" />
+
+  <!-- FEATURES -->
+  <div formArrayName="features">
+    <div *ngFor="let f of features.controls; let i = index" class="feature-item">
+      <input [formControlName]="i" placeholder="Feature" />
+      <button type="button" (click)="removeFeature(i)">X</button>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="button-group">
+    <button type="button" class="add-btn" (click)="addFeature()">+ Add</button>
+    <button type="button" class="quote-btn" (click)="submit()">Submit</button>
+  </div>
+
+  <div *ngIf="successMessage" class="text-success mt-2">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+</form>
+</div>
   <div class="equipment-bg-section mt-5">
     <div class="container">
       <div class="row">

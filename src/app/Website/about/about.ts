@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -7,7 +6,10 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+
+import { WebsiteService } from '../website-service';
 
 @Component({
   selector: 'app-about',
@@ -19,7 +21,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 export class AboutComponent implements OnInit {
   quoteForm!: FormGroup;
 
-  
   slides = [
     { img: '/wedding-pic1.png', label: 'Slide 1: wedding' },
     { img: '/wedding-pic1.png', label: 'Slide 2: wedding' },
@@ -27,20 +28,11 @@ export class AboutComponent implements OnInit {
     { img: '/wedding-pic1.png', label: 'Slide 4: Birth Day' },
   ];
 
-  
   team = {
-    founder: {
-      role: 'Founder',
-      img: '/owner2.png',
-    },
-    ceo: {
-      role: 'C.E.O',
-      mainImg: '/founder.png',
-      smallImg: '/foundre2.png',
-    },
+    founder: { role: 'Founder', img: '/owner2.png' },
+    ceo: { role: 'C.E.O', mainImg: '/founder.png', smallImg: '/foundre2.png' },
   };
 
-  
   mainTypes = ['Wedding', 'Pre-Wedding', 'Child', 'Business'];
 
   subTypeMap: any = {
@@ -51,17 +43,25 @@ export class AboutComponent implements OnInit {
   };
 
   subTypes: string[] = [];
-
   showSubOptions = false;
   showForm = false;
 
   selectedMainType = '';
   selectedSubType = '';
 
-  constructor(private fb: FormBuilder) {}
+  successMessage = '';
+  errorMessage = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private quotationService: WebsiteService,
+  ) {}
 
   ngOnInit(): void {
     this.quoteForm = this.fb.group({
+      name: [''],
+      mobile: [''],
+      email: [''],
       header: [''],
       price: [''],
       features: this.fb.array([]),
@@ -77,7 +77,6 @@ export class AboutComponent implements OnInit {
   onMainTypeChange(type: string) {
     this.selectedMainType = type;
     this.subTypes = this.subTypeMap[type] || [];
-
     this.selectedSubType = '';
     this.showSubOptions = true;
     this.showForm = false;
@@ -97,19 +96,41 @@ export class AboutComponent implements OnInit {
   }
 
   submit() {
-    const payload = {
-      mainType: this.selectedMainType,
-      subType: this.selectedSubType,
-      ...this.quoteForm.value,
-    };
+    if (!this.selectedMainType || !this.selectedSubType) {
+      this.errorMessage = 'Please select main and sub type';
+      this.successMessage = '';
+      return;
+    }
 
-    console.log('Final Payload:', payload);
+   const payload = {
+  mainType: this.selectedMainType,
+  subType: this.selectedSubType,
+  name: this.quoteForm.value.name,
+  mobile: this.quoteForm.value.mobile,
+  email: this.quoteForm.value.email,
+  title: this.quoteForm.value.header,
+  price: this.quoteForm.value.price,
+  items: this.quoteForm.value.features
+           .filter((f: string) => f.trim() !== '')
+           .map((f: string) => ({ label: f })) 
+};
 
-    this.quoteForm.reset();
-    this.features.clear();
-    this.addFeature();
+    this.quotationService.createQuotation(payload).subscribe({
+      next: (res) => {
+        this.successMessage = res.message || 'Quotation submitted successfully!';
+        this.errorMessage = '';
+        console.log('Saved payload:', payload);
 
-    this.showForm = false;
-    this.showSubOptions = false;
+        this.quoteForm.reset();
+        this.features.clear();
+        this.addFeature();
+        this.showForm = false;
+        this.showSubOptions = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Something went wrong';
+        this.successMessage = '';
+      },
+    });
   }
 }

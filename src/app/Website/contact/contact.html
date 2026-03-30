@@ -15,30 +15,46 @@
           <div class="card-body">
             <h5 class="fw-bold mb-3">Get In Contact With Us</h5>
 
-            <form>
+            <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
               <div class="mb-3">
                 <label class="form-label">Full Name</label>
-                <input type="text" class="form-control" placeholder="Your name" />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="fullName"
+                  placeholder="Your name"
+                />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" placeholder="Your phone number" />
+                <input
+                  type="tel"
+                  class="form-control"
+                  formControlName="phoneNumber"
+                  placeholder="Your phone number"
+                />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" placeholder="Your email" />
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="Your email"
+                />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Event Type</label>
-                <select class="form-select">
-                  <option>Wedding</option>
-                  <option>Pre-wedding</option>
-                  <option>Maternity</option>
-                  <option>Child Photography</option>
-                  <option>Other</option>
+                <select class="form-select" formControlName="eventType">
+                  <option value="">Select Event</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="pre-wedding">Pre-Wedding</option>
+                  <option value="maternity">Maternity</option>
+                  <option value="child-photography">Child Photography</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
 
@@ -47,11 +63,15 @@
                 <textarea
                   class="form-control"
                   rows="4"
+                  formControlName="message"
                   placeholder="Tell us about your event"
                 ></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary w-100">Submit Enquiry</button>
+
+              <div *ngIf="successMessage" class="mt-2 text-success">{{ successMessage }}</div>
+              <div *ngIf="errorMessage" class="mt-2 text-danger">{{ errorMessage }}</div>
             </form>
           </div>
         </div>

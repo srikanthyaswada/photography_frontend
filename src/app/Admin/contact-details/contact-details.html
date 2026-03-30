@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="contact-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Number</th>
+        <th>Event Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.fullName }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+        <td>{{ contact.eventType || 'N/A' }}</td>
+        <td class="actions">
+          <button (click)="viewContact(contact)" title="View">👁️</button>
+          <button (click)="editContact(contact)" title="Edit">✏️</button>
+          <button (click)="deleteContact(contact._id)" title="Delete">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="loading" class="loading">Loading contacts...</div>
+  <div *ngIf="!loading && contacts.length === 0" class="loading">No contacts found.</div>
+</div>

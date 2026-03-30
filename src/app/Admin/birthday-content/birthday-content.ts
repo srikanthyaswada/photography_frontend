@@ -1,149 +1,206 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ApiServices } from '../../services/api-services';
+import { PackageSection } from '../package-section/package-section';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-birthday-content',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, PackageSection],
   templateUrl: './birthday-content.html',
   styleUrls: ['./birthday-content.scss'],
 })
 export class BirthdayContent implements OnInit {
   selectedTab = 'images';
-
-  images: string[] = [];
-  videos: string[] = [];
+  packageForm!: FormGroup;
+  images: any[] = [];
+  videos: any[] = [];
   packages: any[] = [];
+  currentEventId: string = '';
   newImages: File[] = [];
   newVideos: File[] = [];
+
   eventTypes: any[] = [];
   eventType: string = '';
   adminId: string = '';
 
-  constructor(private api: ApiServices) {}
+  selectedEventId: string = '';
+  showUploadModal = false;
+  showPackageModal = false;
+
+  constructor(
+    private api: ApiServices,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+  ) {}
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('admin');
-
     if (storedUser) {
       const admin = JSON.parse(storedUser);
       this.adminId = admin._id;
     }
+
+    this.packageForm = this.fb.group({
+      eventType_id: ['', Validators.required],
+      title: [''],
+      price: [''],
+      newFeature: [''],
+      features: this.fb.array([]),
+    });
+
     this.loadData();
     this.loadEventTypes();
+    this.loadPackages();
   }
 
   selectTab(tab: string) {
     this.selectedTab = tab;
+    if (tab === 'packages') this.loadPackages();
   }
+
   loadEventTypes() {
     this.api.getEventTypes().subscribe({
-      next: (res: any) => {
-        this.eventTypes = res?.data || [];
-      },
-      error: (err) => {
-        console.error('Error loading event types', err);
+      next: (res: any) => (this.eventTypes = res?.data || []),
+      error: () => this.toastr.error('Failed to load event types'),
+    });
+  }
+
+  loadPackages() {
+    this.api.getPackagesByEventName('Birthday shoot').subscribe({
+      next: (res: any) => (this.packages = res.data || []),
+      error: () => {
+        this.packages = [];
+        this.toastr.error('Failed to load packages');
       },
     });
   }
+
   onFileSelected(event: any, type: string) {
     const files: FileList = event.target.files;
-    if (type === 'image') {
-      this.newImages.push(...Array.from(files));
-    }
-    if (type === 'video') {
-      this.newVideos.push(...Array.from(files));
-    }
+    if (type === 'image') this.newImages.push(...Array.from(files));
+    if (type === 'video') this.newVideos.push(...Array.from(files));
   }
+
   saveFiles() {
-    if (!this.eventType) {
-      alert('Please select Event Type');
+    if (this.packageForm.invalid) {
+      this.toastr.warning('Please select Event Type');
       return;
     }
 
-    const admin = JSON.parse(localStorage.getItem('admin') || '{}');
-
     const formData = new FormData();
-
-    formData.append('eventType_id', this.eventType);
-    formData.append('admin_id', admin._id);
+    formData.append('eventType_id', this.packageForm.get('eventType_id')?.value);
+    formData.append('admin_id', this.adminId);
 
     this.newImages.forEach((file) => formData.append('images', file));
     this.newVideos.forEach((file) => formData.append('videos', file));
 
     this.api.uploadBirthday(formData).subscribe({
-      next: (res: any) => {
-        alert('Files uploaded successfully');
+      next: () => {
+        this.toastr.success('Files uploaded successfully');
         this.newImages = [];
         this.newVideos = [];
-        this.eventType = '';
+        this.packageForm.reset();
         this.loadData();
       },
-      error: (err: any) => {
-        console.error(err);
-        alert('Error uploading files');
-      },
+      error: () => this.toastr.error('Error uploading files'),
     });
   }
+
   loadData() {
     this.api.getAllBirthday().subscribe({
       next: (res: any) => {
         const events = res?.data || [];
-
         this.images = [];
         this.videos = [];
-        this.packages = [];
 
-        events.forEach((event: any) => {
-          if (event.images?.length) {
-            this.images.push(
-              ...event.images.map(
-                (img: string) => `http://localhost:3007/${img.replace(/\\/g, '/')}`,
-              ),
-            );
-          }
+        events.forEach((e: any) => {
+          (e.images || []).forEach((img: string, i: number) => {
+            this.images.push({
+              url: `http://localhost:3007/${img.replace(/\\/g, '/')}`,
+              eventId: e._id,
+              index: i,
+            });
+          });
 
-          if (event.videos?.length) {
-            this.videos.push(
-              ...event.videos.map(
-                (video: string) => `http://localhost:3007/${video.replace(/\\/g, '/')}`,
-              ),
-            );
-          }
-
-          if (event.packages?.length) {
-            this.packages.push(...event.packages);
-          }
+          (e.videos || []).forEach((v: string, i: number) => {
+            this.videos.push({
+              url: `http://localhost:3007/${v.replace(/\\/g, '/')}`,
+              eventId: e._id,
+              index: i,
+            });
+          });
         });
       },
-      error: (err) => {
-        console.error('Error loading birthday events:', err);
-      },
+      error: () => this.toastr.error('Failed to load events'),
     });
   }
 
-  edit(index: number, type: string) {
-    if (type === 'image') {
-      console.log('Edit image:', this.images[index]);
+  edit(item: any, type: string) {
+    if (!item || item.index === undefined || !item.eventId) {
+      this.toastr.error('Invalid item. Check console.');
+      console.error('Invalid item:', item);
+      return;
     }
 
-    if (type === 'video') {
-      console.log('Edit video:', this.videos[index]);
-    }
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = type === 'image' ? 'image/*' : 'video/*';
+
+    fileInput.onchange = (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      type === 'image' ? formData.append('images', file) : formData.append('videos', file);
+      formData.append('type', type);
+      formData.append('index', String(item.index));
+
+      this.api.updateBirthday(item.eventId, formData).subscribe({
+        next: () => {
+          this.toastr.success('Updated successfully');
+          this.loadData();
+        },
+        error: (err) => {
+          console.error(err);
+          this.toastr.error('Update failed');
+        },
+      });
+    };
+
+    fileInput.click();
   }
 
-  deleteItem(index: number, type: string) {
-    const confirmDelete = confirm('Are you sure you want to delete this item?');
+  deleteItem(item: any, type: string) {
+    if (!confirm('Delete this item?')) return;
 
-    if (!confirmDelete) return;
+    this.api.deleteBirthday(item.eventId, { type, index: item.index }).subscribe({
+      next: () => {
+        this.toastr.success('Deleted successfully');
+        this.loadData();
+      },
+      error: () => this.toastr.error('Failed to delete item'),
+    });
+  }
 
-    if (type === 'image') {
-      this.images.splice(index, 1);
-    }
+  openUpload() {
+    this.showUploadModal = true;
+  }
 
-    if (type === 'video') {
-      this.videos.splice(index, 1);
-    }
+  addPackage() {
+    this.showPackageModal = true;
+  }
+
+  closeModal() {
+    this.showUploadModal = false;
+    this.showPackageModal = false;
   }
 }

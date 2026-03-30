@@ -13,7 +13,7 @@ import { ApiServices } from '../../services/api-services';
 @Component({
   selector: 'app-package-section',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './package-section.html',
   styleUrl: './package-section.scss',
 })
@@ -27,6 +27,7 @@ export class PackageSection implements OnInit {
     private fb: FormBuilder,
   ) {
     this.packageForm = this.fb.group({
+      eventType_id: ['', Validators.required],
       title: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       features: this.fb.array([]),
@@ -39,35 +40,6 @@ export class PackageSection implements OnInit {
   get features() {
     return this.packageForm.get('features') as FormArray;
   }
-
-  addFeature() {
-    const value = this.packageForm.get('newFeature')?.value.trim();
-    if (value) {
-      this.features.push(this.fb.control(value));
-      this.packageForm.get('newFeature')?.reset();
-    }
-  }
-
-  removeFeature(index: number) {
-    this.features.removeAt(index);
-  }
-  // submitPackage() {
-  //   if (this.packageForm.valid) {
-  //     const payload = {
-  //       title: this.packageForm.value.title,
-  //       price: this.packageForm.value.price,
-  //       features: this.features.value
-  //     };
-  //     console.log('Submitting package:', payload);
-
-  //     this.api.post('https://your-api.com/packages', payload)
-  //       .subscribe({
-  //         next: (res) => console.log('Package saved!', res),
-  //         error: (err) => console.error('Error saving package', err)
-  //       });
-  //   }
-  // }
-
   loadEventTypes() {
     this.api.getEventTypes().subscribe({
       next: (res: any) => {
@@ -75,6 +47,51 @@ export class PackageSection implements OnInit {
       },
       error: (err) => {
         console.error('Error loading event types', err);
+      },
+    });
+  }
+
+  addFeature() {
+    const value = this.packageForm.get('newFeature')?.value?.trim();
+
+    if (value) {
+      this.features.push(this.fb.control(value));
+      console.log('Features array:', this.features.value);
+      this.packageForm.get('newFeature')?.reset();
+    }
+  }
+
+  removeFeature(index: number) {
+    this.features.removeAt(index);
+  }
+  submitPackage() {
+    if (this.packageForm.invalid) {
+      this.packageForm.markAllAsTouched();
+      return;
+    }
+
+    const newFeature = this.packageForm.get('newFeature')?.value?.trim();
+    if (newFeature) {
+      this.features.push(this.fb.control(newFeature));
+    }
+
+    const payload = {
+      eventType_id: this.packageForm.value.eventType_id,
+      title: this.packageForm.value.title,
+      price: this.packageForm.value.price,
+      features: this.features.value || [],
+    };
+
+    console.log('Submitting:', payload);
+
+    this.api.createPackage(payload).subscribe({
+      next: (res: any) => {
+        alert('Package created successfully');
+        this.packageForm.reset();
+        this.features.clear();
+      },
+      error: (err) => {
+        alert('Failed to create package');
       },
     });
   }

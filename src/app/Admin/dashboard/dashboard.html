@@ -20,14 +20,15 @@
     <aside class="sidebar" [class.active]="isSidebarOpen">
 
       <ul class="list-unstyled m-0">
-        <li>
+        <!-- <li>
         <a class="sidebar-link"
            routerLink="/dashboard/home"
            routerLinkActive="active"
            (click)="toggleSidebar()">
            Home
         </a>
-      </li>
+      </li> -->
+       
 
         
         <li class="dropdown">
@@ -136,6 +137,22 @@
             </li>
           </ul>
         </li>
+        <li>
+        <a class="sidebar-link"
+           routerLink="/dashboard/contact"
+           routerLinkActive="active"
+           (click)="toggleSidebar()">
+           Customer Details
+        </a>
+      </li>
+       <li>
+        <a class="sidebar-link"
+           routerLink="/dashboard/quotation"
+           routerLinkActive="active"
+           (click)="toggleSidebar()">
+           Quotations
+        </a>
+      </li>
 
       </ul>
 

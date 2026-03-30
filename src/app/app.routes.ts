@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { WebsiteMainLayout } from './Website/website-main-layout/website-main-layout';
 import { WebsiteHome } from './Website/website-home/website-home';
 import { AboutComponent } from './Website/about/about';
-import { Contact } from './Website/contact/contact';
+
 import { Gallery } from './Website/gallery/gallery';
 import { Services } from './Website/services/services';
 import { Portfolio } from './Website/portfolio/portfolio';
@@ -30,6 +30,9 @@ import { BusinessMeetupContent } from './Admin/business-meetup-content/business-
 import { NewbornContent } from './Admin/newborn-content/newborn-content';
 import { BirthdayContent } from './Admin/birthday-content/birthday-content';
 import { Home } from './Admin/home/home';
+import { ContactDetails } from './Admin/contact-details/contact-details';
+import { Quotation } from './Admin/quotation/quotation';
+import { ContactComponent } from './Website/contact/contact';
 
 export const routes: Routes = [
 
@@ -57,23 +60,25 @@ export const routes: Routes = [
   //     { path: 'business-meetup-shoot', component: BusinessMeetupShoot },
   //   ],
   // },
-  // { path: '', component: AdminLogin },
-  // {
-  //   path: 'dashboard',
-  //   component: Dashboard,
-  //   children: [
-  //     { path: '', component: DashboardContent },
-  //     { path: 'traditional', component: TraditionalContent },
-  //     { path: 'candid', component: CandidContent },
-  //     { path: 'regular', component: RegularShootContent },
-  //     { path: 'cinematic', component: CinematicContent },
-  //     { path: 'product', component: ProductLaunchContent },
-  //     { path: 'business', component: BusinessMeetupContent },
-  //     { path: 'newborn', component: NewbornContent },
-  //     { path: 'birthday', component: BirthdayContent },
-  //     {path:'home',component:Home},
-  //   ],
-  // },
+  { path: 'admin', component: AdminLogin },
+  {
+    path: 'dashboard',
+    component: Dashboard,
+    children: [
+      { path: '', component: DashboardContent },
+      { path: 'traditional', component: TraditionalContent },
+      { path: 'candid', component: CandidContent },
+      { path: 'regular', component: RegularShootContent },
+      { path: 'cinematic', component: CinematicContent },
+      { path: 'product', component: ProductLaunchContent },
+      { path: 'business', component: BusinessMeetupContent },
+      { path: 'newborn', component: NewbornContent },
+      { path: 'birthday', component: BirthdayContent },
+      {path:'home',component:Home},
+       {path:'contact',component:ContactDetails},
+       {path:'quotation',component:Quotation}
+    ],
+  },
 
   {
     path: '',
@@ -81,7 +86,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: WebsiteHome },
       { path: 'about', component: AboutComponent },
-      { path: 'contact', component: Contact },
+      { path: 'contact', component:ContactComponent },
       { path: 'gallery', component: Gallery },
       { path: 'service', component: Services },
       { path: 'portfolio', component: Portfolio },
