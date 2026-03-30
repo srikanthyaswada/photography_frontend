@@ -1,0 +1,167 @@
+<div class="dashboard">
+
+  
+  <header class="header">
+
+   
+    <button class="menu-btn d-lg-none" (click)="toggleSidebar()">
+      ☰
+    </button>
+
+    <div class="logo" routerLink="/dashboard">
+      <img src="/icon3.png" alt="Logo" />
+    </div>
+  </header>
+
+  
+  <div class="body">
+
+    
+    <aside class="sidebar" [class.active]="isSidebarOpen">
+
+      <ul class="list-unstyled m-0">
+        <!-- <li>
+        <a class="sidebar-link"
+           routerLink="/dashboard/home"
+           routerLinkActive="active"
+           (click)="toggleSidebar()">
+           Home
+        </a>
+      </li> -->
+       
+
+        
+        <li class="dropdown">
+          <a class="dropdown-toggle sidebar-link"
+             href="#"
+             data-bs-toggle="dropdown">
+            Wedding
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/traditional"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Traditional
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/candid"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Candid
+              </a>
+            </li>
+          </ul>
+        </li>
+
+       
+        <li class="dropdown">
+          <a class="dropdown-toggle sidebar-link"
+             href="#"
+             data-bs-toggle="dropdown">
+            Pre Wedding
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/regular"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Outdoor
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/cinematic"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Indoor
+              </a>
+            </li>
+          </ul>
+        </li>
+
+       
+        <li class="dropdown">
+          <a class="dropdown-toggle sidebar-link"
+             href="#"
+             data-bs-toggle="dropdown">
+            Child
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/birthday"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Birthday
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/newborn"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Milestone
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        
+        <li class="dropdown">
+          <a class="dropdown-toggle sidebar-link"
+             href="#"
+             data-bs-toggle="dropdown">
+            Corporate
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/product"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Events
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item"
+                 routerLink="/dashboard/business"
+                 routerLinkActive="active"
+                 (click)="toggleSidebar()">
+                Meetings
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+        <a class="sidebar-link"
+           routerLink="/dashboard/contact"
+           routerLinkActive="active"
+           (click)="toggleSidebar()">
+           Customer Details
+        </a>
+      </li>
+       <li>
+        <a class="sidebar-link"
+           routerLink="/dashboard/quotation"
+           routerLinkActive="active"
+           (click)="toggleSidebar()">
+           Quotations
+        </a>
+      </li>
+
+      </ul>
+
+    </aside>
+
+    
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

@@ -249,3 +249,140 @@ footer a {
   border: 2px solid #8d6e63;
   transform: scale(1.04);
 }
+@media (max-width: 1200px) {
+  section {
+    padding: 60px 15px;
+  }
+
+  .passage-cards {
+    gap: 20px;
+  }
+
+  .package-card {
+    width: 280px;
+    padding: 2rem 1.5rem;
+  }
+
+  .wedding-section {
+    gap: 2rem;
+    flex-direction: column;
+  }
+
+  .wedding-text p {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+
+  .wedding-video video {
+    width: 100%;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  header {
+    height: 70vh;
+  }
+
+  .package-card {
+    width: 100%;
+  }
+
+  .passage-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .wedding-section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .packages-container {
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wedding-text p {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .wedding-video video {
+    height: auto;
+  }
+
+  .package-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+  }
+
+  .passage-cards {
+    gap: 15px;
+  }
+
+  .wedding-text p {
+    font-size: 0.85rem;
+  }
+
+  .packages-container {
+    gap: 15px;
+  }
+
+  .package-card {
+    width: 100%;
+    padding: 1.6rem 1.2rem;
+  }
+
+  .package-card ul li {
+    font-size: 14px;
+    padding: 0.5rem 0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .btn {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.9rem;
+  }
+}

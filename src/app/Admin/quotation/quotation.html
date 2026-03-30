@@ -1,0 +1,44 @@
+<div class="table-responsive">
+  <table class="quotation-table">
+    <thead>
+      <tr>
+        <th>Main Type</th>
+        <th>Sub Type</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Items</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quotation of quotations">
+        <td>{{ quotation.mainType || '-' }}</td>
+        <td>{{ quotation.subType || '-' }}</td>
+        <td>{{ quotation.name }}</td>
+        <td>{{ quotation.mobile }}</td>
+        <td>{{ quotation.email }}</td>
+        <td>{{ quotation.title || '-' }}</td>
+        <td>{{ quotation.price || '-' }}</td>
+        <td>
+          <span *ngIf="quotation.items?.length; else noItems">
+            <ng-container *ngFor="let item of quotation.items; let last = last">
+              {{ item.label }}<span *ngIf="!last">, </span>
+            </ng-container>
+          </span>
+          <ng-template #noItems>No items</ng-template>
+        </td>
+        <td class="actions">
+          <button (click)="viewQuotation(quotation)" title="View">👁️</button>
+          <button (click)="editQuotation(quotation)" title="Edit">✏️</button>
+          <button (click)="deleteQuotation(quotation._id)" title="Delete">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="loading" class="loading">Loading quotations...</div>
+  <div *ngIf="!loading && quotations.length === 0" class="loading">No quotations found.</div>
+</div>

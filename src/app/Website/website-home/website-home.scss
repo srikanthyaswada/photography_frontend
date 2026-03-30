@@ -1,182 +1,83 @@
-.hero-section {
-  height: 90vh;
-  background: url('/wedding-pic1.png') center/cover no-repeat;
-  position: relative;
+.carousel-inner {
+  height: 60vh;
 }
 
-.hero-overlay {
-  background: rgba(0, 0, 0, 0.35);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 60px;
-}
-
-.hero-content {
-  color: #fff;
-  max-width: 600px;
-}
-
-.hero-content h1 {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.hero-content p {
-  font-size: 16px;
-  margin-bottom: 30px;
-}
-
-.hero-btn {
-  padding: 12px 30px;
-  border: 1px solid #fff;
-  color: #fff;
-  text-decoration: none;
-}
-
-.hero-btn:hover {
-  background: #fff;
-  color: #000;
-}
-.services-section {
-  padding: 80px 40px;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 28px;
-  margin-bottom: 50px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.service-card img {
+.carousel-item img {
   width: 100%;
-  height: 280px;
+  height: 100%;
   object-fit: cover;
 }
 
-.service-card h5 {
-  margin-top: 15px;
-  font-weight: 600;
-}
-.gallery-section {
-  padding: 80px 40px;
+.carousel-caption h5 {
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: bold;
 }
 
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+.card-img-top {
+  object-fit: cover;
+  height: 250px;
 }
 
-.gallery-grid img {
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-img-top {
+    height: 180px;
+  }
+}
+
+.paragraph-section {
+  margin: 0 auto;
+  padding: clamp(15px, 3vw, 25px);
+  border: 1px solid #fdf7f7;
+  border-radius: 10px;
+  background-color: bisque;
+}
+
+.paragraph-section .btn {
+  transition: background 0.3s, transform 0.3s;
+}
+
+.paragraph-section .btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.gallery-img {
   width: 100%;
   height: 250px;
   object-fit: cover;
 }
-.why-section {
-  padding: 70px 40px;
-  background: #f9f9f9;
-}
 
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  text-align: center;
-}
-
-.why-grid h4 {
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-.cta-section {
-  padding: 80px 40px;
-  text-align: center;
-  background: #222;
-  color: #fff;
-}
-
-.cta-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 30px;
-  border: 1px solid #fff;
-  color: #fff;
-  text-decoration: none;
-}
-
-.cta-btn:hover {
-  background: #fff;
-  color: #000;
-}
-@media (max-width: 991px) {
-  .services-grid,
-  .gallery-grid,
-  .why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .hero-content h1 {
-    font-size: 38px;
+@media (max-width: 768px) {
+  .gallery-img {
+    height: 180px;
   }
 }
 
 @media (max-width: 576px) {
-  .services-grid,
-  .gallery-grid,
-  .why-grid {
-    grid-template-columns: 1fr;
+  .gallery-img {
+    height: 150px;
   }
-
-  .hero-overlay {
-    padding: 0 20px;
-  }
-
-  .hero-content h1 {
-    font-size: 32px;
-  }
-}
-.video-section {
-  padding: 80px 40px;
-  text-align: center;
-}
-
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
 }
 
 .video-card video {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 4px;
+  height: auto;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
 }
 
-.video-card h5 {
-  margin-top: 15px;
-  font-weight: 600;
-}
-@media (max-width: 991px) {
-  .video-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.row.text-center h4 {
+  font-size: clamp(18px, 2vw, 24px);
 }
 
 @media (max-width: 576px) {
-  .video-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .video-card video {
-    height: 200px;
+  .carousel-inner {
+    height: 40vh;
   }
 }

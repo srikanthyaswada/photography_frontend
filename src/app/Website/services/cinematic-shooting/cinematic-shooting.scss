@@ -151,3 +151,105 @@ footer a {
     font-size: 1rem;
   }
 }
+
+@media (max-width: 1200px) {
+  .content-block {
+    padding: 60px 15px;
+  }
+
+  .passage-cards {
+    gap: 20px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .wedding-video video {
+    width: 100%;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  header {
+    height: 70vh;
+  }
+
+  .passage-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .wedding-section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+  }
+
+  .wedding-video video {
+    height: auto;
+  }
+
+  .passage-cards .card {
+    padding: 20px 15px;
+  }
+
+  .gallery-grid {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .passage-cards {
+    gap: 10px;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  footer {
+    padding: 30px 15px;
+  }
+}
